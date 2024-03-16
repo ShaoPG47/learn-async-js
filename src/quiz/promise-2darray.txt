@@ -1,1 +1,20 @@
 Explain the code execution based on the order of the messages logged in src/quiz/promise-2darray.txt.
+The sum2Darray do not yield a result or error because it returns a promise,
+I used then to deal with those promises.
+Order:
+Sum called ...
+returning from sum
+Sum called ...
+rejecting ...
+returning from sum
+Error: BAD INPUT: Expected array as input
+resolving ...
+Result: 45
+
+Sum called... will be print first, after that, there is a setTimeout which will push the
+resolving into the event list, at the same time it will keep going and print returning from
+sum, thats why returning from sum is the second place in the order.
+Then it start executing sum2Darray('2dArray'), I think the reason why the rejecting...
+did not goes into the macro task queue is because the input is not an array, so it immediately
+returns rejecting, then print returning from sum, then it catches the error and returns BAD INPUT.
+now, it starts deal with the only task in macro task queue, prints resolving the the result.
